@@ -45,6 +45,11 @@ body {
   object-fit: contain;
 }
 
+.brand > span:last-child {
+  transform: translateY(2px);
+  line-height: 1;
+}
+
 .brand-divider {
   width: 1px;
   height: 22px;
@@ -164,6 +169,7 @@ h1 em {
 
 
 .hero-figure {
+  max-width: 980px;
   border-color: #d8e4f7;
 }
 
@@ -236,6 +242,11 @@ h1 em {
   gap: 9px;
 }
 
+.footer-brand span {
+  line-height: 1;
+  transform: translateY(2px);
+}
+
 .footer-brand img {
   width: 72px;
   height: 16px;
@@ -243,13 +254,13 @@ h1 em {
 }
 
 .hero {
-  padding-block: 26px 14px;
+  padding-block: 46px 14px;
 }
 
 .hero h1 {
   max-width: 1160px;
   margin-bottom: 16px;
-  font-size: clamp(32px, 3.4vw, 44px);
+  font-size: clamp(36px, 4.1vw, 54px);
   font-weight: 630;
   letter-spacing: -0.048em;
   line-height: 1.06;
@@ -260,9 +271,9 @@ h1 em {
 }
 
 .hero .authors {
-  max-width: 920px;
+  max-width: 1080px;
   margin-bottom: 14px;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .hero .affiliations {
@@ -271,7 +282,27 @@ h1 em {
 }
 
 .hero-workshop {
+  text-transform: none;
+  letter-spacing: 0;
   margin-bottom: 17px;
+}
+
+.hero-workshop a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.workshop-year {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.workshop-name {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 .hero .lede {
@@ -280,6 +311,7 @@ h1 em {
 }
 
 .hero .hero-actions {
+  margin-top: 18px;
   margin-bottom: 0;
 }
 
@@ -303,7 +335,7 @@ h1 em {
 
 @media (max-width: 620px) {
   .hero {
-    padding-block: 24px 12px;
+    padding-block: 34px 12px;
   }
 
   .hero h1 {

@@ -33,7 +33,7 @@
         <h1>
           <em>InteractGesture</em><span>: Progressive Chunk Guidance for Continuous Streaming Co-Speech Gesture Control</span>
         </h1>
-        <p class="eyebrow hero-workshop"><a href="https://interactive-social-avatars.github.io/" target="_blank" rel="noreferrer">ECCV 2026 Workshop · Interactive Social Avatars ↗</a></p>
+        <p class="eyebrow hero-workshop"><a href="https://interactive-social-avatars.github.io/" target="_blank" rel="noreferrer"><span class="workshop-year">ECCV 2026</span><span class="workshop-name">Workshop · Interactive Social Avatars ↗</span></a></p>
         <p class="authors">
           <a href="https://www.ekkasit.com/">Ekkasit Pinyoanuntapong</a><sup>1,2</sup>,
           <a href="https://www.linkedin.com/in/ajinkya-deogade/">Ajinkya Deogade</a><sup>1</sup>,
@@ -54,6 +54,10 @@
             />
           </div>
         </div>
+        <div class="hero-actions">
+          <a class="button button-secondary" href="#"><img class="button-icon" src="assets/arxiv-logo.svg" alt="" />arXiv</a>
+          <a class="button button-secondary" href="https://github.com/exitudio/InteractGesture" target="_blank" rel="noreferrer"><img class="button-icon" src="assets/github-logo.svg" alt="" />GitHub ↗</a>
+        </div>
       </section>
 
       <section class="hero-figure section-shell" aria-labelledby="overview-caption">
@@ -64,7 +68,7 @@
           />
         </a>
         <p id="overview-caption" class="caption">
-          <b>One model, three forms of control.</b> Place a joint at a keyframe, draw a continuous
+          <b>Supports multiple applications.</b> Place a joint at a keyframe, draw a continuous
           trajectory, or direct an arm toward a target.
         </p>
       </section>
@@ -74,10 +78,6 @@
           InteractGesture guides individual joints toward user-defined 3D targets while preserving
           natural, speech-aligned motion—without retraining the gesture model.
         </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#">Read the paper</a>
-          <a class="button button-secondary" href="#method">Explore the method</a>
-        </div>
       </section>
 
       <section class="summary section-shell" aria-labelledby="summary-title">
@@ -185,23 +185,6 @@
           </p>
         </div>
 
-        <div class="metrics">
-          <article class="metric metric-primary">
-            <p class="metric-value">6.34<span> cm</span></p>
-            <h3>Average control error</h3>
-            <p>Progressive streaming guidance, down from 11.70 cm with sequential guidance.</p>
-          </article>
-          <article class="metric">
-            <p class="metric-value">0.431</p>
-            <h3>Fréchet Gesture Distance</h3>
-            <p>Best FGD among generated methods; lower indicates more natural motion.</p>
-          </article>
-          <article class="metric">
-            <p class="metric-value">83.9<span>%</span></p>
-            <h3>Targets within 10 cm</h3>
-            <p>Compared with 2.4% for the chunk-wise ControlNet baseline.</p>
-          </article>
-        </div>
 
         <figure class="results-figure">
           <a href="assets/results.png" aria-label="Open the full-resolution qualitative results">
@@ -221,8 +204,8 @@
       <section class="takeaway section-shell" aria-labelledby="takeaway-title">
         <p class="eyebrow">In one sentence</p>
         <h2 id="takeaway-title">
-          InteractGesture makes pretrained co-speech generators spatially steerable—even while the
-          speech is still arriving.
+          InteractGesture makes pretrained co-speech generators spatially controllable across continuous
+          streaming sequences.
         </h2>
         <a class="button button-primary" href="#">Download paper</a>
       </section>
@@ -231,7 +214,7 @@
     <footer class="site-footer section-shell">
       <p class="footer-brand">
         <img src="assets/meta-logo.svg" alt="Meta logo" />
-        InteractGesture · Interactive Social Avatars · ECCV 2026
+        <span>InteractGesture · Interactive Social Avatars · ECCV 2026</span>
       </p>
       <a href="#top">Back to top ↑</a>
     </footer>
