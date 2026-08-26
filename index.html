@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="InteractGesture at the Interactive Social Avatars ECCV 2026 Workshop."
+    />
+    <title>InteractGesture · Interactive Social Avatars · ECCV 2026</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="meta-theme.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="InteractGesture home">
+        <span class="meta-wordmark" aria-label="Meta">
+          <img src="assets/meta-logo.svg" alt="" />
+        </span>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span>InteractGesture</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="https://interactive-social-avatars.github.io/" target="_blank" rel="noreferrer">Workshop ↗</a>
+        <a class="nav-paper" href="#">Paper <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <h1>
+          <em>InteractGesture</em><span>: Progressive Chunk Guidance for Continuous Streaming Co-Speech Gesture Control</span>
+        </h1>
+        <p class="eyebrow hero-workshop"><a href="https://interactive-social-avatars.github.io/" target="_blank" rel="noreferrer">ECCV 2026 Workshop · Interactive Social Avatars ↗</a></p>
+        <p class="authors">
+          <a href="https://www.ekkasit.com/">Ekkasit Pinyoanuntapong</a><sup>1,2</sup>,
+          <a href="https://www.linkedin.com/in/ajinkya-deogade/">Ajinkya Deogade</a><sup>1</sup>,
+          <a href="https://paulstreli.com/">Paul Streli</a><sup>1</sup>, <a href="https://www.linkedin.com/in/wenjing-zhang-265a5793/">Wenjing Zhang</a><sup>1</sup>,
+          <a href="https://joaanna.github.io/">Joanna Materzynska</a><sup>1</sup>, <a href="https://webpages.charlotte.edu/pwang13/">Pu Wang</a><sup>2</sup>,
+          <a href="https://sites.google.com/view/vittoferrari">Vittorio Ferrari</a><sup>1</sup>, <a href="https://www.linkedin.com/in/jieshen-/">Jie Shen</a><sup>1</sup>
+        </p>
+        <div class="affiliations" aria-label="Research affiliations">
+          <div class="affiliate affiliate-meta">
+            <sup>1</sup>
+            <img src="assets/meta-logo.svg" alt="Meta logo" />
+          </div>
+          <div class="affiliate affiliate-uncc">
+            <sup>2</sup>
+            <img
+              src="assets/unc-charlotte-logo.png"
+              alt="University of North Carolina at Charlotte logo"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="hero-figure section-shell" aria-labelledby="overview-caption">
+        <a href="assets/landing.png" aria-label="Open the full-resolution overview figure">
+          <img
+            src="assets/landing.png"
+            alt="Four gesture-generation examples: speech-only motion, joint position control, dense trajectory control, and pointing direction control."
+          />
+        </a>
+        <p id="overview-caption" class="caption">
+          <b>One model, three forms of control.</b> Place a joint at a keyframe, draw a continuous
+          trajectory, or direct an arm toward a target.
+        </p>
+      </section>
+
+      <section class="hero-details section-shell">
+        <p class="lede">
+          InteractGesture guides individual joints toward user-defined 3D targets while preserving
+          natural, speech-aligned motion—without retraining the gesture model.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#">Read the paper</a>
+          <a class="button button-secondary" href="#method">Explore the method</a>
+        </div>
+      </section>
+
+      <section class="summary section-shell" aria-labelledby="summary-title">
+        <div>
+          <p class="section-number">01 / Motivation</p>
+          <h2 id="summary-title">The missing control layer</h2>
+        </div>
+        <div class="summary-copy">
+          <p>
+            Speech-driven models produce plausible gestures, but animators cannot tell a hand where
+            to land or an arm where to point. Directly fixing poses after generation often looks
+            unnatural, and independently generated chunks break motion around their boundaries.
+          </p>
+          <p>
+            InteractGesture solves both problems at inference time: spatial errors from the future flow
+            through a differentiable motion decoder, while overlapping chunks remain editable as
+            new audio arrives.
+          </p>
+        </div>
+      </section>
+
+      <section id="method" class="method section-shell" aria-labelledby="method-title">
+        <div class="section-heading">
+          <p class="section-number">02 / Method</p>
+          <h2 id="method-title">Guide the latent progressively.</h2>
+          <p>
+            The pretrained generator stays frozen. At selected sampling steps, its latent estimate
+            is decoded into SMPL-X joints, compared with the controlled targets, and adjusted using
+            the spatial loss.
+          </p>
+        </div>
+
+        <figure class="feature-figure">
+          <a href="assets/architecture.png" aria-label="Open the full-resolution architecture figure">
+            <img
+              src="assets/architecture.png"
+              alt="InteractGesture architecture showing speech-conditioned sampling, differentiable motion decoding, spatial loss, and latent guidance."
+              loading="lazy"
+            />
+          </a>
+          <figcaption>
+            <span>Inference-time guidance</span>
+            Gradients update motion latents—not model weights—so the approach can be added to a
+            pretrained generator.
+          </figcaption>
+        </figure>
+
+        <div class="steps" aria-label="Method steps">
+          <article>
+            <span>1</span>
+            <h3>Predict</h3>
+            <p>The speech-conditioned sampler estimates the next motion latent.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Decode</h3>
+            <p>A differentiable RVQ-VAE and SMPL-X recover the 3D joints.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Guide</h3>
+            <p>Spatial loss gradients move selected joints toward their targets.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="streaming section-shell" aria-labelledby="streaming-title">
+        <div class="streaming-copy">
+          <p class="section-number">03 / Streaming</p>
+          <h2 id="streaming-title">Future controls can still improve the past.</h2>
+          <p>
+            <em>Progressive Chunk Guidance</em> introduces motion chunks with a staggered delay and
+            keeps an active window editable. A target in the incoming chunk can therefore smooth
+            the trajectory that leads into it—without waiting for the full speech sequence.
+          </p>
+          <div class="compare-key">
+            <span><i class="dot dot-muted"></i> (a) Sequential: cannot see future</span>
+            <span><i class="dot dot-light"></i> (b) Synchronous: accurate, but offline</span>
+            <span><i class="dot dot-accent"></i> (c) Progressive: accurate control + online</span>
+          </div>
+        </div>
+        <figure class="feature-figure compact-figure">
+          <a href="assets/chunk-schedules.png" aria-label="Open the full-resolution chunk guidance comparison">
+            <img
+              src="assets/chunk-schedules.png"
+              alt="Comparison of sequential, synchronous, and progressive chunk-guidance schedules."
+              loading="lazy"
+            />
+          </a>
+          <figcaption>
+            <span>Three schedules</span>
+            Progressive guidance balances online generation with cross-boundary control.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="results" class="results section-shell" aria-labelledby="results-title">
+        <div class="section-heading results-heading">
+          <p class="section-number">04 / Results</p>
+          <h2 id="results-title">Precise control, natural motion.</h2>
+          <p>
+            On BEAT2, progressive guidance reaches spatial targets far more accurately than
+            sequential guidance, inverse kinematics, or chunk-wise ControlNet—while retaining the
+            best generated-motion FGD.
+          </p>
+        </div>
+
+        <div class="metrics">
+          <article class="metric metric-primary">
+            <p class="metric-value">6.34<span> cm</span></p>
+            <h3>Average control error</h3>
+            <p>Progressive streaming guidance, down from 11.70 cm with sequential guidance.</p>
+          </article>
+          <article class="metric">
+            <p class="metric-value">0.431</p>
+            <h3>Fréchet Gesture Distance</h3>
+            <p>Best FGD among generated methods; lower indicates more natural motion.</p>
+          </article>
+          <article class="metric">
+            <p class="metric-value">83.9<span>%</span></p>
+            <h3>Targets within 10 cm</h3>
+            <p>Compared with 2.4% for the chunk-wise ControlNet baseline.</p>
+          </article>
+        </div>
+
+        <figure class="results-figure">
+          <a href="assets/results.png" aria-label="Open the full-resolution qualitative results">
+            <img
+              src="assets/results.png"
+              alt="Qualitative comparison of generated gestures under shared wrist and elbow position controls."
+              loading="lazy"
+            />
+          </a>
+          <figcaption>
+            <b>Qualitative comparison.</b> Guided motion follows the requested wrist and elbow
+            locations while preserving a coherent gesture trajectory.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="takeaway section-shell" aria-labelledby="takeaway-title">
+        <p class="eyebrow">In one sentence</p>
+        <h2 id="takeaway-title">
+          InteractGesture makes pretrained co-speech generators spatially steerable—even while the
+          speech is still arriving.
+        </h2>
+        <a class="button button-primary" href="#">Download paper</a>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <p class="footer-brand">
+        <img src="assets/meta-logo.svg" alt="Meta logo" />
+        InteractGesture · Interactive Social Avatars · ECCV 2026
+      </p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
