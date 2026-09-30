@@ -505,6 +505,31 @@ h2 {
   letter-spacing: -0.045em;
 }
 
+.citation {
+  padding-block: 96px 72px;
+}
+
+.citation h2 {
+  margin-bottom: 28px;
+}
+
+.citation pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre;
+}
+
+.citation code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -601,6 +626,15 @@ h2 {
   .takeaway {
     padding: 88px 22px;
     border-radius: 24px;
+  }
+
+  .citation {
+    padding-block: 72px 52px;
+  }
+
+  .citation pre {
+    padding: 20px;
+    font-size: 12px;
   }
 }
 
